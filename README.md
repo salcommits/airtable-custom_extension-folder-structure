@@ -274,3 +274,70 @@ See [LICENSE.md](LICENSE.md) for license information.
 ## Support
 
 For questions about Interface Extensions, visit the [Airtable Community](https://community.airtable.com/) or contact Airtable support.
+
+## Setup Prompts
+
+### 1. Create a README.md file.
+Create a README.MD file.
+
+### 2. Build a scalable React frontend folder structure
+Build a scalable React frontend folder structure for Airtable custom extensions.
+
+Create a `frontend` folder containing:
+- `index.jsx` — entry point rendering <App />
+- `app/App.jsx` — main layout importing example components
+- `components/`
+  - `common/` — shared reusable components that can be used across multiple features
+    - `CommonExample1.jsx` (accepts props like title, variant, children)
+    - `CommonExample2.jsx`
+    - `index.js` — barrel export
+  - `component1/` — example feature folder using CommonExample1
+    - `Component1.jsx`
+    - `index.js`
+  - `component2/` — example feature folder using CommonExample1
+    - `Component2.jsx`
+    - `index.js`
+- `styles/globals.css` — base styling
+
+Each `common` component should be prop-driven and designed for reuse across the interface.  
+Each feature component (component1, component2) should import and render `CommonExample1` with different props to demonstrate reuse.  
+Keep code clean, minimal, and compiling.  
+Print the final folder structure and show the contents of all new files.
+
+### 3. Setup GitHub
+Open Terminal and run:
+`ls -al ~/.ssh`
+
+Run this command (replace with your GitHub email):
+ssh-keygen -t ed25519 -C “test@email.com”
+
+When prompted:
+* **File location:** press Enter to accept default (/Users/yourname/.ssh/id_ed25519)
+* **Passphrase:** optional (adds extra security)
+
+Then it will create two files:
+* ~/.ssh/id_ed25519 → your private key (keep this secret)
+* ~/.ssh/id_ed25519.pub → your public key (safe to share)
+
+Run
+`eval "$(ssh-agent -s)"`
+
+Run
+`ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
+
+Copy the public key:
+```
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+Then go to:
+GitHub → Settings → SSH and GPG keys → New SSH key
+
+Run to test
+`ssh -T git@github.com`
+
+### 3. Commit Changes
+1. Make changes
+2. git add .
+3. git commit -m "Commit summary"
+4. git push -u origin main
