@@ -304,7 +304,7 @@ Each feature component (component1, component2) should import and render `Common
 Keep code clean, minimal, and compiling.  
 Print the final folder structure and show the contents of all new files.
 
-### 3. Setup GitHub
+### 3. Setup GitHub (Follow, not a prompt)
 Open Terminal and run:
 `ls -al ~/.ssh`
 
@@ -341,3 +341,79 @@ Run to test
 2. git add .
 3. git commit -m "Commit summary"
 4. git push -u origin main
+
+### 4. (Optional) Remove TailwindCSS and use SCSS
+Refactor this project to remove Tailwind CSS and replace it with a modular SCSS setup.
+
+Objectives:
+- Completely remove Tailwind CSS and its dependencies.
+- Introduce a structured SCSS system that compiles into a single CSS output.
+- Include a _components.scss file that matches the component structure in frontend/components/common (e.g., CommonExample1, CommonExample2).
+- Ensure all styles compile into frontend/styles/globals.css.
+
+Tasks:
+1. Remove Tailwind:
+   - Delete tailwind.config.js and postcss.config.js if they exist.
+   - Remove any @tailwind directives and Tailwind class names from all JSX files.
+   - Replace them with clean, semantic class names (e.g., className="card" or className="common-example-1").
+
+2. Add SCSS folder structure inside frontend/styles:
+   frontend/
+     styles/
+       scss/
+         _variables.scss       // color tokens, spacing, fonts
+         _mixins.scss          // reusable mixins/functions
+         _base.scss            // global resets, typography
+         _layout.scss          // layout utilities (grid, flex, spacing)
+         _components.scss      // styling for CommonExample1, CommonExample2
+         main.scss             // root file importing all partials
+       globals.css             // compiled output file
+
+3. _components.scss example content:
+   // _components.scss
+   // Styles matching frontend/components/common structure
+   @use 'variables' as *;
+   @use 'mixins' as *;
+
+   .common-example-1 {
+     border: 1px solid $neutral-300;
+     border-radius: 0.75rem;
+     padding: 1rem;
+     background: $white;
+
+     h3 {
+       font-weight: 600;
+       margin-bottom: 0.5rem;
+     }
+   }
+
+   .common-example-2 {
+     padding: 1rem;
+     background-color: $accent-light;
+     color: $accent-dark;
+     border-radius: 0.5rem;
+   }
+
+4. main.scss imports:
+   // main.scss
+   @use 'variables';
+   @use 'mixins';
+   @use 'base';
+   @use 'layout';
+   @use 'components';
+
+5. Add SCSS build command to package.json:
+   "scripts": {
+     "build:scss": "sass frontend/styles/scss/main.scss frontend/styles/globals.css --no-source-map"
+   }
+
+6. Update React imports:
+   In index.jsx or App.jsx, replace any Tailwind import with:
+   import './styles/globals.css';
+
+Expected Output:
+- Tailwind completely removed.
+- SCSS folder and partials created.
+- _components.scss matches component structure.
+- npm run build:scss compiles all SCSS into frontend/styles/globals.css.
+- Project builds and runs cleanly without Tailwind.
