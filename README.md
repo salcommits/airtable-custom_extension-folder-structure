@@ -338,9 +338,9 @@ Run to test
 
 ### 3. Commit Changes
 1. Make changes
-2. git add .
-3. git commit -m "Commit summary"
-4. git push -u origin main
+2. `git add .`
+3. `git commit -m "Commit summary"`
+4. `git push -u origin main`
 
 ### 4. (Optional) Remove TailwindCSS and use SCSS
 Refactor this project to remove Tailwind CSS and replace it with a modular SCSS setup.
